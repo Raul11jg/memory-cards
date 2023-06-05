@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import Cell from '../components/Cell';
 
 const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [numbers, setNumbers] = useState([]);
   const [hideNumbers, setHideNumbers] = useState(false);
   const [secretNumber, setSecretNumber] = useState(null);
-  const [selectedNumber, setSelectedNumber] = useState(0);
+  const [selectedNumber, setSelectedNumber] = useState(null);
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -30,44 +31,44 @@ const Game = () => {
   };
 
   const selectNumber = (number) => {
+    if (!hideNumbers) return;
+
     setHideNumbers(false);
     setSelectedNumber(number);
     if (number === secretNumber) {
-      console.log('LO ENCONTRASTE');
       setTimeout(() => {
         setSelectedNumber(null);
         handlePlay();
-      }, 5000);
+      }, 3000);
     } else {
-      console.log('ERROR');
+      setTimeout(() => {
+        setIsPlaying(false);
+        setSelectedNumber(null);
+      }, 3000);
     }
   };
 
   return (
-    <div className="game">
-      <h3>Dale a play para jugar</h3>
+    <main className="game">
       {!isPlaying ? (
-        <button onClick={handlePlay}>Play</button>
+        <>
+          <h3>Dale a play para jugar</h3>
+          <button onClick={handlePlay}>Play</button>
+        </>
       ) : (
-        <div>
-          {hideNumbers ? <p>¿Dónde está el número {secretNumber}?</p> : <h3>Memoriza las cartas</h3>}
+        <section>
+          {hideNumbers ? <h3>¿Dónde está el número {secretNumber}?</h3> : <h3>Memoriza las cartas</h3>}
+
           <div className="grid">
             {numbers.map((number, index) => (
               <div className="row" key={index}>
-                <div
-                  className={`cell ${selectedNumber === secretNumber && selectedNumber === number && !hideNumbers ? 'found' : ''}  ${
-                    secretNumber && selectedNumber !== secretNumber && selectedNumber === number && !hideNumbers ? 'incorrect' : ''
-                  }`}
-                  onClick={() => selectNumber(number)}
-                >
-                  {hideNumbers ? '?' : number}
-                </div>
+                <Cell number={number} selectedNumber={selectedNumber} secretNumber={secretNumber} hideNumbers={hideNumbers} onClick={selectNumber} />
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 };
 

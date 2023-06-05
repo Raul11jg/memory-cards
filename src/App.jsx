@@ -5,15 +5,13 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <main>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/game" element={<Game />} />
-          <Route path="/*" element={<Navigate to="/" />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/game" element={<Game />} />
+        <Route path="/*" element={<Navigate to="/" />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
