@@ -48,3 +48,7 @@ button {
 .incorrect {
   background-color: red;
 }
+
+.username {
+  margin: 8px;
+}

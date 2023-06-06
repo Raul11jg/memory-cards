@@ -17,6 +17,7 @@ const Home = () => {
       setError('Añade un nombre válido de 2 letras o más');
       return;
     }
+    localStorage.setItem('username', name.trim());
     navigate('/game');
   };
 

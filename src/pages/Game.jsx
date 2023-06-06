@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import Cell from '../components/Cell';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -7,6 +10,10 @@ const Game = () => {
   const [hideNumbers, setHideNumbers] = useState(false);
   const [secretNumber, setSecretNumber] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
+
+  const navigate = useNavigate();
+
+  const username = localStorage.getItem('username');
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -48,27 +55,41 @@ const Game = () => {
     }
   };
 
-  return (
-    <main className="game">
-      {!isPlaying ? (
-        <>
-          <h3>Dale a play para jugar</h3>
-          <button onClick={handlePlay}>Play</button>
-        </>
-      ) : (
-        <section>
-          {hideNumbers ? <h3>¿Dónde está el número {secretNumber}?</h3> : <h3>Memoriza las cartas</h3>}
+  const handleGoBack = () => {
+    // Handle go back functionality
+    // For example, you can use the navigate function with the appropriate route
+    navigate('/previous-route');
+  };
 
-          <div className="grid">
-            {numbers.map((number, index) => (
-              <div className="row" key={index}>
-                <Cell number={number} selectedNumber={selectedNumber} secretNumber={secretNumber} hideNumbers={hideNumbers} onClick={selectNumber} />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-    </main>
+  return (
+    <>
+      <header>
+        <div className="back-arrow" onClick={handleGoBack}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <span className="username">{`${username}`}</span>
+        </div>
+      </header>
+      <main className="game">
+        {!isPlaying ? (
+          <>
+            <h3>Dale a play para jugar</h3>
+            <button onClick={handlePlay}>Play</button>
+          </>
+        ) : (
+          <section>
+            {hideNumbers ? <h3>¿Dónde está el número {secretNumber}?</h3> : <h3>Memoriza las cartas</h3>}
+
+            <div className="grid">
+              {numbers.map((number, index) => (
+                <div className="row" key={index}>
+                  <Cell number={number} selectedNumber={selectedNumber} secretNumber={secretNumber} hideNumbers={hideNumbers} onClick={selectNumber} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </main>
+    </>
   );
 };
 
