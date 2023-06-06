@@ -8,7 +8,7 @@
   "background_color": "#ffffff",
   "icons": [
     {
-      "src": "/maskable_icon.png",
+      "src": "/public/maskable_icon.png",
       "sizes": "200x200",
       "type": "image/png",
       "purpose": "any maskable"
