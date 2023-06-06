@@ -8,6 +8,12 @@
   "background_color": "#ffffff",
   "icons": [
     {
+      "src": "/maskable_icon.png",
+      "sizes": "200x200",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/public/numberCard.svg",
       "sizes": "800x800",
       "type": "image/svg"
