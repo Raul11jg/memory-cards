@@ -14,6 +14,7 @@ const Game = () => {
   const [selectedNumber, setSelectedNumber] = useState(null);
   const [points, setPoints] = useState(0);
   const [difficulty, setDifficulty] = useState('low');
+  const [timeLeft, setTimeLeft] = useState(10);
 
   const navigate = useNavigate();
 
@@ -24,10 +25,18 @@ const Game = () => {
     const generatedNumbers = generateNumbers(1, 9, 9);
     setNumbers(generatedNumbers);
 
+    const duration = getDuration();
+    setTimeLeft(duration / 1000);
+
+    const intervalId = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1);
+    }, 1000);
+
     setTimeout(() => {
       setHideNumbers(true);
       setSecretNumber(Math.floor(Math.random() * (9 - 1 + 1)) + 1);
-    }, getDuration());
+      clearInterval(intervalId);
+    }, duration);
   };
 
   const generateNumbers = (min, max, count) => {
@@ -109,7 +118,14 @@ const Game = () => {
           </>
         ) : (
           <section>
-            {hideNumbers ? <h3>¿Dónde está el número {secretNumber}?</h3> : <h3>Memoriza las cartas</h3>}
+            {hideNumbers ? (
+              <h3>¿Dónde está el número {secretNumber}?</h3>
+            ) : (
+              <>
+                <h3>Memoriza las cartas</h3>
+                <p>Tiempo restante: {timeLeft} segundos</p>
+              </>
+            )}
 
             <div className="grid">
               {numbers.map((number, index) => (
