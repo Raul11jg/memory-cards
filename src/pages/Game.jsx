@@ -41,6 +41,12 @@ const Game = () => {
     return uniqueNumbers;
   };
 
+  const vibration = (time) => {
+    if (navigator.vibrate) {
+      navigator.vibrate(time);
+    }
+  };
+
   const selectNumber = (number) => {
     if (!hideNumbers) return;
 
@@ -53,6 +59,7 @@ const Game = () => {
         handlePlay();
       }, 3000);
     } else {
+      vibration(500);
       setTimeout(() => {
         setPoints(0);
         setIsPlaying(false);
