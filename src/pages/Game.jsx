@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Cell from '../components/Cell';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 
 const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,6 +10,7 @@ const Game = () => {
   const [hideNumbers, setHideNumbers] = useState(false);
   const [secretNumber, setSecretNumber] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
+  const [points, setPoints] = useState(0);
 
   const navigate = useNavigate();
 
@@ -43,12 +44,15 @@ const Game = () => {
     setHideNumbers(false);
     setSelectedNumber(number);
     if (number === secretNumber) {
+      setPoints(points + 10);
       setTimeout(() => {
         setSelectedNumber(null);
         handlePlay();
       }, 3000);
     } else {
       setTimeout(() => {
+        setPoints(0);
+
         setIsPlaying(false);
         setSelectedNumber(null);
       }, 3000);
@@ -56,9 +60,7 @@ const Game = () => {
   };
 
   const handleGoBack = () => {
-    // Handle go back functionality
-    // For example, you can use the navigate function with the appropriate route
-    navigate('/previous-route');
+    navigate('/home');
   };
 
   return (
@@ -68,6 +70,7 @@ const Game = () => {
           <FontAwesomeIcon icon={faArrowLeft} />
           <span className="username">{`${username}`}</span>
         </div>
+        <p>Points: {points}</p>
       </header>
       <main className="game">
         {!isPlaying ? (
