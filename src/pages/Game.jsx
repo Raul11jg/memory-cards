@@ -4,6 +4,8 @@ import Cell from '../components/Cell';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+import { DIFFICULTY_VALUES } from '../game-settings';
+
 const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [numbers, setNumbers] = useState([]);
@@ -11,6 +13,7 @@ const Game = () => {
   const [secretNumber, setSecretNumber] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
   const [points, setPoints] = useState(0);
+  const [difficulty, setDifficulty] = useState('low');
 
   const navigate = useNavigate();
 
@@ -24,7 +27,7 @@ const Game = () => {
     setTimeout(() => {
       setHideNumbers(true);
       setSecretNumber(Math.floor(Math.random() * (9 - 1 + 1)) + 1);
-    }, 5000);
+    }, getDuration());
   };
 
   const generateNumbers = (min, max, count) => {
@@ -44,7 +47,7 @@ const Game = () => {
     setHideNumbers(false);
     setSelectedNumber(number);
     if (number === secretNumber) {
-      setPoints(points + 10);
+      setPoints(points + getPointsForDifficulty());
       setTimeout(() => {
         setSelectedNumber(null);
         handlePlay();
@@ -52,7 +55,6 @@ const Game = () => {
     } else {
       setTimeout(() => {
         setPoints(0);
-
         setIsPlaying(false);
         setSelectedNumber(null);
       }, 3000);
@@ -63,6 +65,18 @@ const Game = () => {
     navigate('/home');
   };
 
+  const handleDifficultyChange = (event) => {
+    setDifficulty(event.target.value);
+  };
+
+  const getPointsForDifficulty = () => {
+    return DIFFICULTY_VALUES[difficulty]?.points || 10;
+  };
+
+  const getDuration = () => {
+    return DIFFICULTY_VALUES[difficulty]?.duration || 10000;
+  };
+
   return (
     <>
       <header>
@@ -71,6 +85,14 @@ const Game = () => {
           <span className="username">{`${username}`}</span>
         </div>
         <p>Points: {points}</p>
+        <div>
+          <label htmlFor="difficulty">Dificultad:</label>
+          <select id="difficulty" value={difficulty} onChange={handleDifficultyChange}>
+            <option value="low">Bajo</option>
+            <option value="mid">Medio</option>
+            <option value="hard">Alto</option>
+          </select>
+        </div>
       </header>
       <main className="game">
         {!isPlaying ? (
