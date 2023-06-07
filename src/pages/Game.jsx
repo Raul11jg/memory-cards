@@ -99,7 +99,7 @@ const Game = () => {
       <header>
         <div className="back-arrow" title="Ir atrás" onClick={handleGoBack}>
           <FontAwesomeIcon icon={faArrowLeft} />
-          <span className="username">{`${username}`}</span>
+          {username && <span className="username">{`${username}`}</span>}
         </div>
         <p>Puntos: {points}</p>
         <div className="difficultySelector">
