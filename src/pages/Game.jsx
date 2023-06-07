@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cell from '../components/Cell';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './Game.css';
 
 import { DIFFICULTY_VALUES } from '../game-settings';
 
@@ -96,12 +97,12 @@ const Game = () => {
   return (
     <>
       <header>
-        <div className="back-arrow" onClick={handleGoBack}>
+        <div className="back-arrow" title="Ir atrás" onClick={handleGoBack}>
           <FontAwesomeIcon icon={faArrowLeft} />
           <span className="username">{`${username}`}</span>
         </div>
-        <p>Points: {points}</p>
-        <div>
+        <p>Puntos: {points}</p>
+        <div className="difficultySelector">
           <label htmlFor="difficulty">Dificultad:</label>
           <select id="difficulty" value={difficulty} onChange={handleDifficultyChange}>
             <option value="low">Bajo</option>
@@ -110,11 +111,14 @@ const Game = () => {
           </select>
         </div>
       </header>
+
       <main className="game">
         {!isPlaying ? (
           <>
             <h3>Dale a play para jugar</h3>
-            <button onClick={handlePlay}>Play</button>
+            <button className="playButton" onClick={handlePlay}>
+              Play
+            </button>
           </>
         ) : (
           <section>

@@ -1,0 +1,43 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-top: 20px;
+}
+
+.username {
+  margin: 8px;
+}
+
+select {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: large;
+}
+
+#difficulty {
+  margin-left: 6px;
+}
+
+.back-arrow {
+  cursor: pointer;
+}
+
+.playButton {
+  width: auto;
+  margin-top: 10px;
+}

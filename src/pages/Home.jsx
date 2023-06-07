@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 
 const Home = () => {
@@ -22,15 +24,24 @@ const Home = () => {
   };
 
   return (
-    <main>
-      <h2>Introduce tu nombre</h2>
+    <>
+      <header className="homeHeader">
+        <h1>Memory cards</h1>
+      </header>
 
-      <form onSubmit={handleFormSubmit}>
-        <input type="text" placeholder="Nombre" className={`${error ? 'errorName' : ''}`} value={name} onChange={handleInputChange} />
-        {error && <p className="errorText">Añade un nombre válido de 2 letras o más</p>}
-        <button type="submit">Jugar</button>
-      </form>
-    </main>
+      <main>
+        <h2>Introduce tu nombre</h2>
+
+        <form onSubmit={handleFormSubmit}>
+          <div className="inputContainer">
+            <FontAwesomeIcon icon={faUser} className="userIcon" />
+            <input type="text" placeholder="Nombre" className={`${error ? 'errorName' : ''}`} value={name} onChange={handleInputChange} />
+          </div>
+          {error && <p className="errorText">Añade un nombre válido de 2 letras o más</p>}
+          <button type="submit">Jugar</button>
+        </form>
+      </main>
+    </>
   );
 };
 
