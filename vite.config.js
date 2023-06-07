@@ -14,6 +14,7 @@ export default defineConfig({
       manifest,
       registerType: 'autoUpdate',
       workbox: {
+        globIgnores: ['index.html'],
         globPatterns: ['**/*.{js,css,ttf,jpg,png,html}', 'fonts'],
         globDirectory: 'dist',
       },
@@ -24,5 +25,4 @@ export default defineConfig({
     globals: true,
     setupFiles: './setupTests.js',
   },
-  base: '',
 });
