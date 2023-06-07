@@ -14,9 +14,16 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/numberCard.svg",
-      "sizes": "800x800",
-      "type": "image/svg"
+      "src": "/splash.png",
+      "type": "image/png",
+      "sizes": "1280x1920",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ]
+  ],
+  "splash_pages": null
 }
