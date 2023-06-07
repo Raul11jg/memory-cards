@@ -14,7 +14,6 @@ export default defineConfig({
       manifest,
       registerType: 'autoUpdate',
       workbox: {
-        globIgnores: ['index.html'],
         globPatterns: ['**/*.{js,css,ttf,jpg,png,html}', 'fonts'],
         globDirectory: 'dist',
       },
