@@ -13,7 +13,6 @@ export default defineConfig({
       manifest: './manifest.json',
       registerType: 'autoUpdate',
       workbox: {
-        globIgnores: ['index.html'],
         globPatterns: ['**/*.{js,css,ttf,jpg,png}'],
         globDirectory: 'dist',
       },
