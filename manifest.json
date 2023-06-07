@@ -20,5 +20,16 @@
       "purpose": "maskable"
     }
   ],
-  "splash_pages": null
+  "splash_pages": [
+    {
+      "url": "/",
+      "icons": [
+        {
+          "src": "/splash.png",
+          "sizes": "1280x1920",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }
