@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      manifest,
+      //manifest,
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,ttf,jpg,png,html}', 'fonts'],
